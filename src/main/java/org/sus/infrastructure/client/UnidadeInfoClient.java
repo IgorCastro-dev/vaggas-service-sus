@@ -6,7 +6,7 @@ import jakarta.ws.rs.PathParam;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import org.sus.domain.unidadeinfo.model.UnidadeInfo;
 
-@RegisterRestClient(baseUri = "local/8080")
+@RegisterRestClient(baseUri = "http://localhost:8071/")
 @Path("/unidade")
 public interface UnidadeInfoClient {
 

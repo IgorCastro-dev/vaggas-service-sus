@@ -15,6 +15,9 @@ public class UnidadeInfo {
         return new UnidadeInfo(capacidade, ativo);
     }
 
+    public UnidadeInfo() {
+    }
+
     public Integer getCapacidade() {
         return capacidade;
     }

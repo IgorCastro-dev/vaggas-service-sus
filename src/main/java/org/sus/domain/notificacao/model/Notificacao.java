@@ -13,6 +13,9 @@ public class Notificacao {
         this.descricao = descricao;
     }
 
+    public Notificacao() {
+    }
+
     public String getTitulo() {
         return titulo;
     }

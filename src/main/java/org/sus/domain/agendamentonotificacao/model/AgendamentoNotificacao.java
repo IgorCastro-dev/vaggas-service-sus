@@ -11,6 +11,9 @@ public class AgendamentoNotificacao {
         this.unidadeId = unidadeId;
     }
 
+    public AgendamentoNotificacao() {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

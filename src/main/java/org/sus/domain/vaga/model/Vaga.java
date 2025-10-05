@@ -18,6 +18,9 @@ public class Vaga {
         this.unidadeId = unidadeId;
     }
 
+    public Vaga() {
+    }
+
     public Long getId() {
         return id;
     }
