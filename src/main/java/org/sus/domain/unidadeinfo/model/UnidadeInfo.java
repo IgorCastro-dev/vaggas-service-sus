@@ -1,29 +1,37 @@
 package org.sus.domain.unidadeinfo.model;
 
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.Objects;
 
 public class UnidadeInfo {
-    private Integer capacidade;
+    private String nomeUnidade;
     private Boolean ativo;
+    private LocalTime horaAbre;
+    private LocalTime horaFecha;
+    private Duration duracao;
 
-    private UnidadeInfo(Integer capacidade, Boolean ativo) {
-        this.capacidade = capacidade;
+    private UnidadeInfo(String nomeUnidade,Boolean ativo, LocalTime horaAbre, LocalTime horaFecha, Duration duracao) {
+        this.nomeUnidade = nomeUnidade;
         this.ativo = ativo;
+        this.horaAbre = horaAbre;
+        this.horaFecha = horaFecha;
+        this.duracao = duracao;
     }
 
-    public static UnidadeInfo criaUnidadeInfo(Integer capacidade, Boolean ativo){
-        return new UnidadeInfo(capacidade, ativo);
+    public static UnidadeInfo criaUnidadeInfo(String nomeUnidade,Boolean ativo, LocalTime horaAbre, LocalTime horaFecha, Duration duracao){
+        return new UnidadeInfo(nomeUnidade,ativo, horaAbre,  horaFecha,  duracao);
     }
 
     public UnidadeInfo() {
     }
 
-    public Integer getCapacidade() {
-        return capacidade;
+    public String getNomeUnidade() {
+        return nomeUnidade;
     }
 
-    public void setCapacidade(Integer capacidade) {
-        this.capacidade = capacidade;
+    public void setNomeUnidade(String nomeUnidade) {
+        this.nomeUnidade = nomeUnidade;
     }
 
     public Boolean getAtivo() {
@@ -34,17 +42,39 @@ public class UnidadeInfo {
         this.ativo = ativo;
     }
 
-    
+    public LocalTime getHoraAbre() {
+        return horaAbre;
+    }
+
+    public void setHoraAbre(LocalTime horaAbre) {
+        this.horaAbre = horaAbre;
+    }
+
+    public LocalTime getHoraFecha() {
+        return horaFecha;
+    }
+
+    public void setHoraFecha(LocalTime horaFecha) {
+        this.horaFecha = horaFecha;
+    }
+
+    public Duration getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(Duration duracao) {
+        this.duracao = duracao;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         UnidadeInfo that = (UnidadeInfo) o;
-        return Objects.equals(capacidade, that.capacidade) && Objects.equals(ativo, that.ativo);
+        return Objects.equals(nomeUnidade, that.nomeUnidade) && Objects.equals(ativo, that.ativo) && Objects.equals(horaAbre, that.horaAbre) && Objects.equals(horaFecha, that.horaFecha) && Objects.equals(duracao, that.duracao);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(capacidade, ativo);
+        return Objects.hash(nomeUnidade, ativo, horaAbre, horaFecha, duracao);
     }
 }

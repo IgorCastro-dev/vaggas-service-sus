@@ -1,21 +1,20 @@
 package org.sus.domain.vaga.model;
 
+import java.time.LocalTime;
 import java.util.Objects;
 
 public class Vaga {
     private Long id;
     private Long unidadeId;
-    private Integer vagasDisponiveis;
+    private LocalTime horarioInicio;
+    private LocalTime horarioFim;
 
-    public Vaga(Long id, Long unidadeId, Integer vagasDisponiveis) {
+
+    public Vaga(Long id, Long unidadeId, LocalTime horarioInicio, LocalTime horarioFim) {
         this.id = id;
         this.unidadeId = unidadeId;
-        this.vagasDisponiveis = vagasDisponiveis;
-    }
-
-    public Vaga(Integer vagasDisponiveis, Long unidadeId) {
-        this.vagasDisponiveis = vagasDisponiveis;
-        this.unidadeId = unidadeId;
+        this.horarioInicio = horarioInicio;
+        this.horarioFim = horarioFim;
     }
 
     public Vaga() {
@@ -37,27 +36,31 @@ public class Vaga {
         this.unidadeId = unidadeId;
     }
 
-    public void removeCidadaoVaga(){
-        this.vagasDisponiveis--;
+    public LocalTime getHorarioInicio() {
+        return horarioInicio;
     }
 
-    public Integer getVagasDisponiveis() {
-        return vagasDisponiveis;
+    public void setHorarioInicio(LocalTime horarioInicio) {
+        this.horarioInicio = horarioInicio;
     }
 
-    public void setVagasDisponiveis(Integer vagasDisponiveis) {
-        this.vagasDisponiveis = vagasDisponiveis;
+    public LocalTime getHorarioFim() {
+        return horarioFim;
+    }
+
+    public void setHorarioFim(LocalTime horarioFim) {
+        this.horarioFim = horarioFim;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Vaga vagas = (Vaga) o;
-        return Objects.equals(id, vagas.id) && Objects.equals(unidadeId, vagas.unidadeId) && Objects.equals(vagasDisponiveis, vagas.vagasDisponiveis);
+        Vaga vaga = (Vaga) o;
+        return Objects.equals(id, vaga.id) && Objects.equals(unidadeId, vaga.unidadeId) && Objects.equals(horarioInicio, vaga.horarioInicio) && Objects.equals(horarioFim, vaga.horarioFim);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, unidadeId, vagasDisponiveis);
+        return Objects.hash(id, unidadeId, horarioInicio, horarioFim);
     }
 }
