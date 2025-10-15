@@ -15,7 +15,7 @@ public class BuscaUnidadeInfoGatewayImpl implements BuscaUnidadeInfoGateway {
     UnidadeInfoClient unidadeInfoClient;
 
     @Override
-    public UnidadeInfo buscaUnidadeInfo(Long idUnidadeInfo) {
+    public UnidadeInfo execute(Long idUnidadeInfo) {
         return unidadeInfoClient.buscaUnidadeInfo(idUnidadeInfo);
     }
 }

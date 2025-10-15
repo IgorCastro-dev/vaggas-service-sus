@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Data
@@ -26,6 +27,9 @@ public class VagaEntity implements Serializable {
 
     @Column(name = "unidade_id")
     private Long unidadeId;
+
+    @Column(name = "data")
+    private LocalDate data;
 
     @Column(name = "horario_inicio")
     private LocalTime horarioInicio;

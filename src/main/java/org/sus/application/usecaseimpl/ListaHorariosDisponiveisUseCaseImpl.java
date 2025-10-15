@@ -1,5 +1,8 @@
 package org.sus.application.usecaseimpl;
 
+import org.sus.application.gateway.BuscaUnidadeInfoGateway;
+import org.sus.application.gateway.BuscaVagaPelaDataEunidadeIdGatway;
+import org.sus.application.gateway.BuscaVagaPorUnidadeIdGateway;
 import org.sus.domain.unidadeinfo.model.UnidadeInfo;
 import org.sus.domain.vaga.model.Vaga;
 import org.sus.domain.vagasinfo.model.HorarioDisponivel;
@@ -12,12 +15,18 @@ import java.util.LinkedHashSet;
 import java.util.Optional;
 
 public class ListaHorariosDisponiveisUseCaseImpl implements ListaHorariosDisponiveisUseCase {
+    private final BuscaUnidadeInfoGateway buscaUnidadeInfoGateway;
+    private final BuscaVagaPelaDataEunidadeIdGatway  buscaVagaDataEunidadeIdGatway;
 
+    public ListaHorariosDisponiveisUseCaseImpl(BuscaUnidadeInfoGateway buscaUnidadeInfoGateway, BuscaVagaPelaDataEunidadeIdGatway buscaVagaDataEunidadeIdGatway) {
+        this.buscaUnidadeInfoGateway = buscaUnidadeInfoGateway;
+        this.buscaVagaDataEunidadeIdGatway = buscaVagaDataEunidadeIdGatway;
+    }
 
     @Override
     public VagasInfo execute(LocalDate dataConsulta, Long idUnidade) {
-        Optional<Vaga> vaga = buscaVagaPelaData(dataConsulta);
-        UnidadeInfo unidadeInfo = buscaUnidadeInfo(idUnidade);
+        Optional<Vaga> vaga = buscaVagaDataEunidadeIdGatway.execute(dataConsulta,idUnidade);
+        UnidadeInfo unidadeInfo = buscaUnidadeInfoGateway.execute(idUnidade);
 
         VagasInfo vagasInfo = new VagasInfo();
         vagasInfo.setUnidadeNome(unidadeInfo.getNomeUnidade());

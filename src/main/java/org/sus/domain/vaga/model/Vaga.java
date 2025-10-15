@@ -1,18 +1,21 @@
 package org.sus.domain.vaga.model;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 
 public class Vaga {
     private Long id;
     private Long unidadeId;
+    private LocalDate data;
     private LocalTime horarioInicio;
     private LocalTime horarioFim;
 
 
-    public Vaga(Long id, Long unidadeId, LocalTime horarioInicio, LocalTime horarioFim) {
+    public Vaga(Long id, Long unidadeId,LocalDate data ,LocalTime horarioInicio, LocalTime horarioFim) {
         this.id = id;
         this.unidadeId = unidadeId;
+        this.data = data;
         this.horarioInicio = horarioInicio;
         this.horarioFim = horarioFim;
     }
@@ -40,6 +43,14 @@ public class Vaga {
         return horarioInicio;
     }
 
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
     public void setHorarioInicio(LocalTime horarioInicio) {
         this.horarioInicio = horarioInicio;
     }
@@ -56,11 +67,11 @@ public class Vaga {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Vaga vaga = (Vaga) o;
-        return Objects.equals(id, vaga.id) && Objects.equals(unidadeId, vaga.unidadeId) && Objects.equals(horarioInicio, vaga.horarioInicio) && Objects.equals(horarioFim, vaga.horarioFim);
+        return Objects.equals(id, vaga.id) && Objects.equals(unidadeId, vaga.unidadeId) && Objects.equals(data, vaga.data) && Objects.equals(horarioInicio, vaga.horarioInicio) && Objects.equals(horarioFim, vaga.horarioFim);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, unidadeId, horarioInicio, horarioFim);
+        return Objects.hash(id, unidadeId, data, horarioInicio, horarioFim);
     }
 }

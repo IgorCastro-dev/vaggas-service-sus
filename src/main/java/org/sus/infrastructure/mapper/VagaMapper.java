@@ -11,7 +11,9 @@ public class VagaMapper {
         return new VagaEntity(
                 vaga.getId(),
                 vaga.getUnidadeId(),
-                vaga.getVagasDisponiveis()
+                vaga.getData(),
+                vaga.getHorarioInicio(),
+                vaga.getHorarioFim()
         );
     }
 
@@ -19,7 +21,9 @@ public class VagaMapper {
         return new Vaga(
                 vagaEntity.getId(),
                 vagaEntity.getUnidadeId(),
-                vagaEntity.getVagasDisponiveis()
+                vagaEntity.getData(),
+                vagaEntity.getHorarioInicio(),
+                vagaEntity.getHorarioFim()
         );
     }
 }

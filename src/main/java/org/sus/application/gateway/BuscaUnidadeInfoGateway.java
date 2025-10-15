@@ -3,5 +3,5 @@ package org.sus.application.gateway;
 import org.sus.domain.unidadeinfo.model.UnidadeInfo;
 
 public interface BuscaUnidadeInfoGateway {
-    UnidadeInfo buscaUnidadeInfo(Long idUnidadeInfo);
+    UnidadeInfo execute(Long idUnidadeInfo);
 }
