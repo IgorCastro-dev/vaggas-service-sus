@@ -1,8 +1,7 @@
 package org.sus.application.usecaseimpl;
 
 import org.sus.application.gateway.BuscaUnidadeInfoGateway;
-import org.sus.application.gateway.BuscaVagaPelaDataEunidadeIdGatway;
-import org.sus.application.gateway.BuscaVagaPorUnidadeIdGateway;
+import org.sus.application.gateway.BuscaVagasPelaDataEunidadeIdGatway;
 import org.sus.domain.unidadeinfo.model.UnidadeInfo;
 import org.sus.domain.vaga.model.Vaga;
 import org.sus.domain.vagasinfo.model.HorarioDisponivel;
@@ -12,20 +11,22 @@ import org.sus.usecase.ListaHorariosDisponiveisUseCase;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.LinkedHashSet;
-import java.util.Optional;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ListaHorariosDisponiveisUseCaseImpl implements ListaHorariosDisponiveisUseCase {
     private final BuscaUnidadeInfoGateway buscaUnidadeInfoGateway;
-    private final BuscaVagaPelaDataEunidadeIdGatway  buscaVagaDataEunidadeIdGatway;
+    private final BuscaVagasPelaDataEunidadeIdGatway  buscaVagasPelaDataEunidadeIdGatway;
 
-    public ListaHorariosDisponiveisUseCaseImpl(BuscaUnidadeInfoGateway buscaUnidadeInfoGateway, BuscaVagaPelaDataEunidadeIdGatway buscaVagaDataEunidadeIdGatway) {
+    public ListaHorariosDisponiveisUseCaseImpl(BuscaUnidadeInfoGateway buscaUnidadeInfoGateway, BuscaVagasPelaDataEunidadeIdGatway buscaVagasPelaDataEunidadeIdGatway) {
         this.buscaUnidadeInfoGateway = buscaUnidadeInfoGateway;
-        this.buscaVagaDataEunidadeIdGatway = buscaVagaDataEunidadeIdGatway;
+        this.buscaVagasPelaDataEunidadeIdGatway = buscaVagasPelaDataEunidadeIdGatway;
     }
 
     @Override
     public VagasInfo execute(LocalDate dataConsulta, Long idUnidade) {
-        Optional<Vaga> vaga = buscaVagaDataEunidadeIdGatway.execute(dataConsulta,idUnidade);
+        List<Vaga> vagas = buscaVagasPelaDataEunidadeIdGatway.execute(dataConsulta,idUnidade);
         UnidadeInfo unidadeInfo = buscaUnidadeInfoGateway.execute(idUnidade);
 
         VagasInfo vagasInfo = new VagasInfo();
@@ -45,10 +46,13 @@ public class ListaHorariosDisponiveisUseCaseImpl implements ListaHorariosDisponi
             horaAtual = horaFim;
         }
 
-        if (vaga.isPresent() && vaga.get().getHorarioInicio() != null) {
-            vagasInfo.removerHorarioPorInicio(horariosDisponiveis, vaga.get().getHorarioInicio());
-        }
+        if (!vagas.isEmpty()) {
+            Set<LocalTime> horariosOcupados = vagas.stream()
+                    .map(Vaga::getHorarioInicio)
+                    .collect(Collectors.toSet());
 
+            horariosDisponiveis.removeIf(h -> horariosOcupados.contains(h.getHoraInicio()));
+        }
         vagasInfo.setHorariosDisponiveis(horariosDisponiveis);
         return vagasInfo;
     }

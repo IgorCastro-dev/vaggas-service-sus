@@ -20,16 +20,15 @@ public class VagaConfig {
     @ApplicationScoped
     public AlocarUsuarioNaVagaImpl alocarUsuarioNaVagaImpl(
             BuscaUnidadeInfoGateway buscaUnidadeInfoGateway,
-            BuscaVagaPorUnidadeIdGateway buscaVagaPorUnidadeIdGateway,
+            BuscaVagasPelaDataEunidadeIdGatway buscaVagasDataEunidadeIdGatway,
             SalvaVagaGateway salvaVagaGateway,
             EnviaNotificacaoGateway enviaNotificacaoGateway,
             AtualizaVagaGateway atualizaVagaGateway
     ){
         return new AlocarUsuarioNaVagaImpl(
                  buscaUnidadeInfoGateway,
-                 buscaVagaPorUnidadeIdGateway,
+                buscaVagasDataEunidadeIdGatway,
                  salvaVagaGateway,
-                 enviaNotificacaoGateway,
-                 atualizaVagaGateway);
+                 enviaNotificacaoGateway);
     }
 }
