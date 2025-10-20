@@ -4,6 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.Produces;
 import org.sus.application.gateway.*;
 import org.sus.application.usecaseimpl.AlocarUsuarioNaVagaImpl;
+import org.sus.application.usecaseimpl.ListaHorariosDisponiveisUseCaseImpl;
 import org.sus.application.usecaseimpl.ListaTodasAsVagasUseCaseImpl;
 
 @ApplicationScoped
@@ -30,5 +31,14 @@ public class VagaConfig {
                 buscaVagasDataEunidadeIdGatway,
                  salvaVagaGateway,
                  enviaNotificacaoGateway);
+    }
+
+    @Produces
+    @ApplicationScoped
+    public ListaHorariosDisponiveisUseCaseImpl listaHorariosDisponiveisUseCase(
+            BuscaUnidadeInfoGateway buscaUnidadeInfoGateway,
+            BuscaVagasPelaDataEunidadeIdGatway  buscaVagasPelaDataEunidadeIdGatway
+    ){
+        return new ListaHorariosDisponiveisUseCaseImpl(buscaUnidadeInfoGateway,buscaVagasPelaDataEunidadeIdGatway);
     }
 }

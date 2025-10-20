@@ -2,7 +2,6 @@ package org.sus.infrastructure.controller;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.QueryParam;
 import org.sus.domain.vaga.model.Vaga;
 import org.sus.domain.vagasinfo.model.VagasInfo;
@@ -18,7 +17,7 @@ public class VagaController {
     private ListaTodasAsVagasUseCase listaTodasAsVagasUseCase;
     private ListaHorariosDisponiveisUseCase listaHorariosDisponiveisUseCase;
 
-    public VagaController(ListaTodasAsVagasUseCase listaTodasAsVagasUseCase) {
+    public VagaController(ListaTodasAsVagasUseCase listaTodasAsVagasUseCase,ListaHorariosDisponiveisUseCase listaHorariosDisponiveisUseCase) {
         this.listaTodasAsVagasUseCase = listaTodasAsVagasUseCase;
         this.listaHorariosDisponiveisUseCase = listaHorariosDisponiveisUseCase;
     }
@@ -29,6 +28,7 @@ public class VagaController {
     }
 
     @GET
+    @Path("/horarios")
     public VagasInfo getListaHorariosDisponiveis(
             @QueryParam("data") LocalDate dataConsulta,
             @QueryParam("id_unidade") Long idUnidade) {
